@@ -617,3 +617,117 @@
 </html>
 <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script src="http://192.168.1.24:199/zhishi/js/a.js"></script>
+<script>
+$(document).ready(function () {
+    // 先获取弹窗相关元素（缓存元素，提升性能）
+    var $popup = $(".ck");
+    var $closeBtn = $popup.find(".close-btn");
+    var $resultText = $popup.find(".result-text");
+    var $popupImg = $popup.find("img");
+    var popupTimer = null; // 用于存储自动关闭的定时器
+
+    // --------------------------
+    // 选择题点击事件（触发弹窗显示）
+    // --------------------------
+    $(".timu > div").click(function () {
+        var $this = $(this);
+        var isCorrect = $this.attr("da") === "1";
+
+        // 1. 设置弹窗内容
+        if (isCorrect) {
+            $resultText.text("回答正确！");
+            $popupImg.attr("src", "https://051024.eu.org/zuoye/liti/gz.gif");
+            $this.css("background-color", "blue");
+            updateCount("#dui");
+        } else {
+            $resultText.text("回答错误！");
+            $popupImg.attr("src", "https://051024.eu.org/zuoye/liti/2.gif");
+            $this.css("background-color", "red");
+            updateCount("#cuo");
+        }
+
+        // 2. 显示弹窗，并重置自动关闭定时器
+        $popup.show();
+        // 清除之前的定时器（避免多次点击导致弹窗提前关闭）
+        if (popupTimer) clearTimeout(popupTimer);
+        // 1.5秒后自动关闭弹窗
+        popupTimer = setTimeout(() => {
+            $popup.hide();
+        }, 1500);
+    });
+
+    // --------------------------
+    // 手动关闭弹窗：点击“×”按钮
+    // --------------------------
+    $closeBtn.on("click", function (e) {
+        // 阻止事件冒泡（关键！避免点击按钮时触发弹窗背景的关闭事件）
+        e.stopPropagation();
+        $popup.hide();
+        // 清除自动关闭定时器（避免隐藏后定时器仍在运行）
+        if (popupTimer) clearTimeout(popupTimer);
+    });
+
+    // --------------------------
+    // 手动关闭弹窗：点击弹窗背景（非内容区域）
+    // --------------------------
+    $popup.on("click", function (e) {
+        // 仅当点击弹窗的“背景层”（即弹窗本身，而非内部子元素）时才关闭
+        if (e.target === $popup[0]) {
+            $popup.hide();
+            if (popupTimer) clearTimeout(popupTimer);
+        }
+    });
+
+    // --------------------------
+    // 其他辅助函数（统计更新、重置等）
+    // --------------------------
+    function updateCount(selector) {
+        var current = parseInt($(selector).text());
+        $(selector).text(current + 1);
+    }
+
+    $(".cz").click(function () {
+        $("#dui").text("0");
+        $("#cuo").text("0");
+        $(".timu > div").css("background-color", "brown");
+        // 重置弹窗状态
+        $popup.hide();
+        if (popupTimer) clearTimeout(popupTimer);
+    });
+});
+</script>
+<div class="ck">
+    <div class="bt">答题结果<button class="close-btn">×</button></div>
+    <!-- 专门用于显示结果的文本容器 -->
+    <span class="result-text"></span>
+    <img src="https://img-blog.csdnimg.cn/20200724165628912.gif" alt="正确提示">
+</div>
+
+<!-- 修复后的JS逻辑（仅保留文本显示相关部分） -->
+<script>
+$(document).ready(function () {
+    // 获取弹窗和文本容器元素
+    var $popup = $(".ck");
+    var $resultText = $popup.find(".result-text"); // 定位到专门的文本容器
+
+    // 选择题点击事件（触发结果显示）
+    $(".timu > div").click(function () {
+        var isCorrect = $(this).attr("da") === "1";
+
+        // 仅更新文本容器的内容，不影响其他元素
+        if (isCorrect) {
+            $resultText.text("回答正确！"); // 正确文字
+        } else {
+            $resultText.text("回答错误！"); // 错误文字
+        }
+
+        $popup.show(); // 显示弹窗
+    });
+
+    // 关闭按钮和其他逻辑（保持不变）
+    $(".close-btn").click(function (e) {
+        e.stopPropagation();
+        $popup.hide();
+    });
+});
+</script>
