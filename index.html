@@ -1,37 +1,271 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="zh-CN">
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-
-    <title>登录页</title>
-    <!-- 引入字体图标库 -->
-    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
-    <link rel="stylesheet" href="171.css">
-    <script type="text/javascript">
-function MM_goToURL() { //v3.0
-  var i, args=MM_goToURL.arguments; document.MM_returnValue = false;
-  for (i=0; i<(args.length-1); i+=2) eval(args[i]+".location='"+args[i+1]+"'");
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>儿童运动足部健康调查问卷</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        // 配置Tailwind自定义主题
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF', // 主蓝色
+                        secondary: '#E8F3FF', // 浅蓝背景
+                        neutral: '#F9FBFF', // 白色系
+                        dark: '#1D2939', // 文字深色
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
     </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .shadow-custom {
+                box-shadow: 0 10px 30px -5px rgba(22, 93, 255, 0.1);
+            }
+            .transition-custom {
+                transition: all 0.3s ease;
+            }
+        }
+    </style>
 </head>
+<body class="bg-neutral min-h-screen font-sans text-dark">
+    <!-- 页面头部 -->
+    <header class="bg-primary text-white py-6 shadow-md">
+        <div class="container mx-auto px-4 md:px-8">
+            <h1 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold">儿童运动足部健康调查问卷</h1>
+            <p class="mt-2 text-blue-100">关注孩子足部健康，助力快乐运动成长</p>
+        </div>
+    </header>
 
-<body>
-    <div class="container">
-        <h1>登录</h1>
-        <div class="ipt-box">
-            <input type="text" placeholder="账号" autocomplete="off">
+    <!-- 问卷主体 -->
+    <main class="container mx-auto px-4 md:px-8 py-10">
+        <div class="max-w-3xl mx-auto bg-white rounded-xl shadow-custom p-6 md:p-8">
+            <!-- 问卷说明 -->
+            <div class="mb-8 pb-6 border-b border-gray-100">
+                <h2 class="text-xl font-semibold text-primary mb-2">问卷说明</h2>
+                <p class="text-gray-600">本次调查旨在了解儿童运动过程中的足部健康状况，您的回答将帮助我们更好地为儿童足部健康提供解决方案。所有数据仅用于研究分析，我们将严格保护您的隐私。</p>
+            </div>
+
+            <!-- 问卷表单 -->
+            <form id="surveyForm" class="space-y-8">
+                <!-- 问题1 -->
+                <div class="survey-question">
+                    <h3 class="text-lg font-medium mb-4 flex items-start">
+                        <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-primary text-white text-sm mr-2 mt-0.5">1</span>
+                        您是否观察过孩子进行体育运动时的脚部动作？
+                    </h3>
+                    <div class="pl-8 space-y-2">
+                        <label class="flex items-center cursor-pointer transition-custom hover:text-primary">
+                            <input type="radio" name="q1" value="是" class="w-4 h-4 text-primary focus:ring-primary mr-2">
+                            <span>是</span>
+                        </label>
+                        <label class="flex items-center cursor-pointer transition-custom hover:text-primary">
+                            <input type="radio" name="q1" value="否" class="w-4 h-4 text-primary focus:ring-primary mr-2">
+                            <span>否</span>
+                        </label>
+                        <label class="flex items-center cursor-pointer transition-custom hover:text-primary">
+                            <input type="radio" name="q1" value="偶尔观察" class="w-4 h-4 text-primary focus:ring-primary mr-2">
+                            <span>偶尔观察</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- 问题2 -->
+                <div class="survey-question">
+                    <h3 class="text-lg font-medium mb-4 flex items-start">
+                        <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-primary text-white text-sm mr-2 mt-0.5">2</span>
+                        孩子是否向您抱怨过脚部酸痛、不适等情况？
+                    </h3>
+                    <div class="pl-8 space-y-2">
+                        <label class="flex items-center cursor-pointer transition-custom hover:text-primary">
+                            <input type="radio" name="q2" value="经常" class="w-4 h-4 text-primary focus:ring-primary mr-2">
+                            <span>经常</span>
+                        </label>
+                        <label class="flex items-center cursor-pointer transition-custom hover:text-primary">
+                            <input type="radio" name="q2" value="偶尔" class="w-4 h-4 text-primary focus:ring-primary mr-2">
+                            <span>偶尔</span>
+                        </label>
+                        <label class="flex items-center cursor-pointer transition-custom hover:text-primary">
+                            <input type="radio" name="q2" value="从未" class="w-4 h-4 text-primary focus:ring-primary mr-2">
+                            <span>从未</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- 问题3 -->
+                <div class="survey-question">
+                    <h3 class="text-lg font-medium mb-4 flex items-start">
+                        <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-primary text-white text-sm mr-2 mt-0.5">3</span>
+                        您是否为孩子报名过体育类兴趣班或运动课程？
+                    </h3>
+                    <div class="pl-8 space-y-2">
+                        <label class="flex items-center cursor-pointer transition-custom hover:text-primary">
+                            <input type="radio" name="q3" value="是，多种" class="w-4 h-4 text-primary focus:ring-primary mr-2">
+                            <span>是，多种</span>
+                        </label>
+                        <label class="flex items-center cursor-pointer transition-custom hover:text-primary">
+                            <input type="radio" name="q3" value="是，一种" class="w-4 h-4 text-primary focus:ring-primary mr-2">
+                            <span>是，一种</span>
+                        </label>
+                        <label class="flex items-center cursor-pointer transition-custom hover:text-primary">
+                            <input type="radio" name="q3" value="否" class="w-4 h-4 text-primary focus:ring-primary mr-2">
+                            <span>否</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- 问题4 -->
+                <div class="survey-question">
+                    <h3 class="text-lg font-medium mb-4 flex items-start">
+                        <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-primary text-white text-sm mr-2 mt-0.5">4</span>
+                        您认为教练能否公平、均衡地照顾到每一位孩子？
+                    </h3>
+                    <div class="pl-8 space-y-2">
+                        <label class="flex items-center cursor-pointer transition-custom hover:text-primary">
+                            <input type="radio" name="q4" value="完全可以" class="w-4 h-4 text-primary focus:ring-primary mr-2">
+                            <span>完全可以</span>
+                        </label>
+                        <label class="flex items-center cursor-pointer transition-custom hover:text-primary">
+                            <input type="radio" name="q4" value="基本可以" class="w-4 h-4 text-primary focus:ring-primary mr-2">
+                            <span>基本可以</span>
+                        </label>
+                        <label class="flex items-center cursor-pointer transition-custom hover:text-primary">
+                            <input type="radio" name="q4" value="很难做到" class="w-4 h-4 text-primary focus:ring-primary mr-2">
+                            <span>很难做到</span>
+                        </label>
+                        <label class="flex items-center cursor-pointer transition-custom hover:text-primary">
+                            <input type="radio" name="q4" value="不了解" class="w-4 h-4 text-primary focus:ring-primary mr-2">
+                            <span>不了解</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- 问题5 -->
+                <div class="survey-question">
+                    <h3 class="text-lg font-medium mb-4 flex items-start">
+                        <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-primary text-white text-sm mr-2 mt-0.5">5</span>
+                        您观察到孩子在走路、跳跃等日常运动时姿态是否正常？
+                    </h3>
+                    <div class="pl-8 space-y-2">
+                        <label class="flex items-center cursor-pointer transition-custom hover:text-primary">
+                            <input type="radio" name="q5" value="完全正常" class="w-4 h-4 text-primary focus:ring-primary mr-2">
+                            <span>完全正常</span>
+                        </label>
+                        <label class="flex items-center cursor-pointer transition-custom hover:text-primary">
+                            <input type="radio" name="q5" value="略有异常" class="w-4 h-4 text-primary focus:ring-primary mr-2">
+                            <span>略有异常</span>
+                        </label>
+                        <label class="flex items-center cursor-pointer transition-custom hover:text-primary">
+                            <input type="radio" name="q5" value="明显异常" class="w-4 h-4 text-primary focus:ring-primary mr-2">
+                            <span>明显异常</span>
+                        </label>
+                        <label class="flex items-center cursor-pointer transition-custom hover:text-primary">
+                            <input type="radio" name="q5" value="未留意" class="w-4 h-4 text-primary focus:ring-primary mr-2">
+                            <span>未留意</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- 问题6 -->
+                <div class="survey-question">
+                    <h3 class="text-lg font-medium mb-4 flex items-start">
+                        <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-primary text-white text-sm mr-2 mt-0.5">6</span>
+                        如果有一款儿童专用鞋垫可以改善孩子足部相关问题，您是否愿意了解并考虑购买？
+                    </h3>
+                    <div class="pl-8 space-y-2">
+                        <label class="flex items-center cursor-pointer transition-custom hover:text-primary">
+                            <input type="radio" name="q6" value="非常愿意" class="w-4 h-4 text-primary focus:ring-primary mr-2">
+                            <span>非常愿意</span>
+                        </label>
+                        <label class="flex items-center cursor-pointer transition-custom hover:text-primary">
+                            <input type="radio" name="q6" value="愿意了解，视情况购买" class="w-4 h-4 text-primary focus:ring-primary mr-2">
+                            <span>愿意了解，视情况购买</span>
+                        </label>
+                        <label class="flex items-center cursor-pointer transition-custom hover:text-primary">
+                            <input type="radio" name="q6" value="不太感兴趣" class="w-4 h-4 text-primary focus:ring-primary mr-2">
+                            <span>不太感兴趣</span>
+                        </label>
+                        <label class="flex items-center cursor-pointer transition-custom hover:text-primary">
+                            <input type="radio" name="q6" value="完全不愿意" class="w-4 h-4 text-primary focus:ring-primary mr-2">
+                            <span>完全不愿意</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- 提交区域 -->
+                <div class="pt-4 border-t border-gray-100 flex justify-center">
+                    <button type="button" id="submitBtn" class="bg-primary hover:bg-primary/90 text-white font-medium py-3 px-8 rounded-lg shadow-lg transition-custom flex items-center">
+                        <i class="fa fa-paper-plane mr-2"></i>
+                        提交问卷
+                    </button>
+                </div>
+            </form>
         </div>
-        <div class="ipt-box">
-            <input type="password" id="password" placeholder="密码" autocomplete="off">
-            <i class="eye fa fa-eye-slash"></i>
-            <div class="beam"></div>
+    </main>
+
+    <!-- 页面底部 -->
+    <footer class="bg-primary/5 py-6 mt-10">
+        <div class="container mx-auto px-4 md:px-8 text-center text-gray-600 text-sm">
+            <p><a href="./admin.html" >数据分析</a></p>
         </div>
-        <button class="btn-login" onClick="MM_goToURL('parent','nmsl.html');return document.MM_returnValue">登录</button>
-    </div>
+    </footer>
+
+    <!-- 交互脚本 -->
+    <script>
+        // 提交按钮点击事件
+        document.getElementById('submitBtn').addEventListener('click', function() {
+            // 收集表单数据
+            const formData = {};
+            let isComplete = true;
+            
+            // 检查所有问题是否都已回答
+            for (let i = 1; i <= 6; i++) {
+                const radioGroup = document.getElementsByName(`q${i}`);
+                let selectedValue = null;
+                
+                for (const radio of radioGroup) {
+                    if (radio.checked) {
+                        selectedValue = radio.value;
+                        break;
+                    }
+                }
+                
+                if (!selectedValue) {
+                    isComplete = false;
+                    alert(`请回答第 ${i} 个问题`);
+                    break;
+                }
+                
+                formData[`q${i}`] = selectedValue;
+            }
+            
+            // 表单填写完整时的处理
+            if (isComplete) {
+                console.log('问卷数据：', formData); // 控制台输出数据，方便查看
+                alert('感谢您的参与！问卷提交成功。');
+                
+                // 可选：重置表单
+                // document.getElementById('surveyForm').reset();
+            }
+        });
+
+        // 为所有单选框添加hover效果
+        const radioLabels = document.querySelectorAll('.survey-question label');
+        radioLabels.forEach(label => {
+            label.addEventListener('mouseenter', function() {
+                this.classList.add('bg-secondary/50', 'rounded', 'px-2', 'py-1');
+            });
+            label.addEventListener('mouseleave', function() {
+                this.classList.remove('bg-secondary/50', 'rounded', 'px-2', 'py-1');
+            });
+        });
+    </script>
 </body>
-
 </html>
-
-<script src="171.js"></script>
